@@ -3,7 +3,12 @@ Webhooks for Bricks forms
 
 Lets you add a webhook to a form on submission using the custom action
 
-Installation:
+ 
+
+[Video Walk Through & Demo](https://www.youtube.com/watch?v=m54P4Zx5Y_w)[  
+](Video Walk Through & Demo)
+
+**Installation:**
 
 -   Download Latest release
 
