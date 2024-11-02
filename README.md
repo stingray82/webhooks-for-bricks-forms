@@ -15,11 +15,11 @@ Installation:
 
 Navigate to Bricks ----\> Webhook for Forms
 
-![](https://github.com/stingray82/repo-images/raw/main/webhook-for-bricks-forms/Viewing Plugin.png)
+![](https://github.com/stingray82/repo-images/raw/main/webhook-for-bricks-forms/viewing-plugin.png)
 
 **Settings Page:**
 
-![](https://github.com/stingray82/repo-images/raw/main/webhook-for-bricks-forms/Webhook Settings.png)
+![](https://github.com/stingray82/repo-images/raw/main/webhook-for-bricks-forms/webhook-settings.png)
 
 To add a form you will add a form ID in (1) and a Webhook Url (2) and click
 (save (4)
@@ -32,13 +32,13 @@ Debug Settings are enabled by pushing (3)
 
 **Front End:**
 
-![](https://github.com/stingray82/repo-images/raw/main/webhook-for-bricks-forms/Form Details.png)
+![](https://github.com/stingray82/repo-images/raw/main/webhook-for-bricks-forms/form-details.png)
 
 If you inspect a form you will get the ID on the data-element-id
 
 **Within Builder:**
 
-![](https://github.com/stingray82/repo-images/raw/main/webhook-for-bricks-forms/Builder - Form ID.png)
+![](https://github.com/stingray82/repo-images/raw/main/webhook-for-bricks-forms/builder-form-id.png)
 
 Select the form and look a the default class in this example \#brxe-4a8d1d
 
@@ -52,11 +52,11 @@ Actions its in the dropdown list
 
 \<Image 1\>
 
-![](https://github.com/stingray82/repo-images/raw/main/webhook-for-bricks-forms/Custom Action 1.png)
+![](https://github.com/stingray82/repo-images/raw/main/webhook-for-bricks-forms/custom-action1.png)
 
 And you need to make sure it is selected as per the below image and been saved
 
-![](https://github.com/stingray82/repo-images/raw/main/webhook-for-bricks-forms/Custom Action Set.png)
+![](https://github.com/stingray82/repo-images/raw/main/webhook-for-bricks-forms/custom-action.png)
 
 **Support Me:  **
 
