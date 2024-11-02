@@ -5,8 +5,7 @@ Lets you add a webhook to a form on submission using the custom action
 
  
 
-[Video Walk Through & Demo](https://www.youtube.com/watch?v=m54P4Zx5Y_w)[  
-](Video Walk Through & Demo)
+[Video Walk Through & Demo](https://www.youtube.com/watch?v=m54P4Zx5Y_w)
 
 **Installation:**
 
