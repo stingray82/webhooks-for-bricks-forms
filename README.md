@@ -5,6 +5,15 @@ Lets you add a webhook to a form on submission using the custom action
 
  
 
+ 
+
+V1.1 - Prepare for Repo, Security and other fixes
+
+V1.2 Added FormData Option as well as JSON - BREAKING CHANGES will need manual
+migration!
+
+ 
+
 [Video Walk Through & Demo](https://www.youtube.com/watch?v=m54P4Zx5Y_w)
 
 **Installation:**
