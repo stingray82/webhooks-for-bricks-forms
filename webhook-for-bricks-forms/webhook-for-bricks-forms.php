@@ -3,7 +3,7 @@
 Plugin Name: Webhook for Bricks Forms
 Description: Adds form ID and webhook URL pairs to trigger specific webhooks on Bricks form submissions, with debug options and response format selection.
 Plugin URI: https://github.com/stingray82/webhooks-for-bricks-forms/
-Version: 1.21
+Version: 1.3
 Author: Stingray82 & Reallyusefulplugins
 Text Domain: webhook-for-bricks-forms
 Author URI: https://Reallyusefulplugins.com
@@ -74,37 +74,45 @@ function rup_bhfbf_render_webhook_for_forms_admin_page() {
 
     // Process form submission for both add and edit
     if ( isset( $_POST['rup_bhfbf_webhook_for_forms_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['rup_bhfbf_webhook_for_forms_nonce'] ) ), 'rup_bhfbf_save_webhook_for_forms' ) ) {
+
+        // Update debug option regardless of other values.
+        $debug_value = isset( $_POST['debug_mode'] ) ? true : false;
+        update_option( 'rup_bhfbf_debug', $debug_value );
+
         $form_id = isset( $_POST['form_id'] ) ? sanitize_text_field( wp_unslash( $_POST['form_id'] ) ) : '';
         $webhook_url = isset( $_POST['webhook_url'] ) ? esc_url_raw( wp_unslash( $_POST['webhook_url'] ) ) : '';
         $response_format = isset( $_POST['response_format'] ) ? sanitize_text_field( wp_unslash( $_POST['response_format'] ) ) : 'json';
 
-        // If editing, use the original form ID if not changed
-        if ( isset( $_POST['edit_form_id'] ) && ! empty( $_POST['edit_form_id'] ) ) {
-            $original_form_id = sanitize_text_field( wp_unslash( $_POST['edit_form_id'] ) );
-            // If the form ID was changed, remove the old entry
-            if ( $original_form_id !== $form_id && isset( $form_webhooks[ $original_form_id ] ) ) {
-                unset( $form_webhooks[ $original_form_id ] );
-            }
-        }
-
         if ( $form_id && $webhook_url ) {
+            // If editing, use the original form ID if not changed
+            if ( isset( $_POST['edit_form_id'] ) && ! empty( $_POST['edit_form_id'] ) ) {
+                $original_form_id = sanitize_text_field( wp_unslash( $_POST['edit_form_id'] ) );
+                // If the form ID was changed, remove the old entry
+                if ( $original_form_id !== $form_id && isset( $form_webhooks[ $original_form_id ] ) ) {
+                    unset( $form_webhooks[ $original_form_id ] );
+                }
+            }
+
             $form_webhooks[ $form_id ] = [
                 'url'    => $webhook_url,
                 'format' => $response_format,
             ];
 
             update_option( 'rup_bhfbf_webhooks', $form_webhooks );
-            update_option( 'rup_bhfbf_debug', isset( $_POST['debug_mode'] ) );
 
-            echo '<div class="updated"><p>' . esc_html__( 'Settings saved successfully.', 'webhook-for-bricks-forms' ) . '</p></div>';
-
-            // Reset edit variables after saving
-            $edit_form_id = '';
-            $edit_webhook  = [
-                'url'    => '',
-                'format' => 'json',
-            ];
+            // Redirect after saving to clear edit parameters
+            wp_redirect( admin_url( 'admin.php?page=webhook_for_forms&message=saved' ) );
+            exit;
+        } else {
+            // Even if no webhook data is provided, redirect after updating debug mode.
+            wp_redirect( admin_url( 'admin.php?page=webhook_for_forms&message=saved' ) );
+            exit;
         }
+    }
+    
+    // Display saved message if applicable
+    if ( isset( $_GET['message'] ) && $_GET['message'] === 'saved' ) {
+        echo '<div class="updated"><p>' . esc_html__( 'Settings saved successfully.', 'webhook-for-bricks-forms' ) . '</p></div>';
     }
     ?>
     <div class="wrap">
@@ -117,7 +125,15 @@ function rup_bhfbf_render_webhook_for_forms_admin_page() {
                 echo '<input type="hidden" name="edit_form_id" value="' . esc_attr( $edit_form_id ) . '">';
             }
             ?>
-            <h2><?php esc_html_e( empty( $edit_form_id ) ? 'Add New Form Webhook' : 'Edit Form Webhook', 'webhook-for-bricks-forms' ); ?></h2>
+            <?php
+            // Use literal strings for translation
+            if ( empty( $edit_form_id ) ) {
+                $form_heading = esc_html__( 'Add New Form Webhook', 'webhook-for-bricks-forms' );
+            } else {
+                $form_heading = esc_html__( 'Edit Form Webhook', 'webhook-for-bricks-forms' );
+            }
+            ?>
+            <h2><?php echo esc_html( $form_heading ); ?></h2>
             <table class="form-table">
                 <tr>
                     <th><label for="form_id"><?php esc_html_e( 'Form ID', 'webhook-for-bricks-forms' ); ?></label></th>
@@ -216,15 +232,15 @@ function rup_bhfbf_trigger_webhook_on_bricks_form_submission( $form ) {
         $debug_mode = get_option( 'rup_bhfbf_debug', false );
         if ( $debug_mode ) {
             $log  = "Webhook Debug Log:\n";
-            $log .= "Form ID: " . print_r( $submitted_form_id, true ) . "\n";
-            $log .= "Webhook URL: " . print_r( $url, true ) . "\n";
-            $log .= "Response Format: " . print_r( $format, true ) . "\n";
-            $log .= "Request Body: " . print_r( $body, true ) . "\n";
-            $log .= "Request Headers: " . print_r( $headers, true ) . "\n";
+            $log .= "Form ID: " . var_export( $submitted_form_id, true ) . "\n";
+            $log .= "Webhook URL: " . var_export( $url, true ) . "\n";
+            $log .= "Response Format: " . var_export( $format, true ) . "\n";
+            $log .= "Request Body: " . var_export( $body, true ) . "\n";
+            $log .= "Request Headers: " . var_export( $headers, true ) . "\n";
             if ( is_wp_error( $response ) ) {
                 $log .= "Webhook Error: " . $response->get_error_message() . "\n";
             } else {
-                $log .= "Webhook Response: " . print_r( $response, true ) . "\n";
+                $log .= "Webhook Response: " . var_export( $response, true ) . "\n";
             }
             error_log( $log );
         }
