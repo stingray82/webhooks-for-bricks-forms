@@ -4,7 +4,7 @@ Tags: bricks builder, webhooks, forms, debug, integration
 Requires at least: 6.3
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.3
+Stable tag: 1.31
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,6 +43,9 @@ Yes, the plugin is fully translatable and includes a text domain `webhook-for-br
 2. Example of configured form-webhook pairs.
 
 == Changelog ==
+
+= 1.31 =
+Fixed Multisite Redirection issue replaced with JS
 
 = 1.3 =
 * Updated Debug Options
