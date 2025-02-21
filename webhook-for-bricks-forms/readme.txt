@@ -20,6 +20,11 @@ Webhook for Bricks Forms allows you to easily configure form ID and webhook URL 
 
 This plugin is designed for seamless integration with Bricks Builder and ensures secure and optimized performance.
 
+
+**Video Tutorial - Webhook For Bricks Forms Setup Guide**  
+[youtube https://www.youtube.com/watch?v=dg-UWhLsEuU]
+
+[Try Webhook For Bricks Forms in a Sandbox](https://reallyusefulplugins.com/try-whfbf/)
 == Installation ==
 
 1. Upload the plugin files to the `/wp-content/plugins/webhook-for-bricks-forms` directory or install the plugin through the WordPress plugins screen directly.
@@ -40,7 +45,13 @@ Yes, the plugin is fully translatable and includes a text domain `webhook-for-br
 == Screenshots ==
 
 1. Plugin settings page for managing webhooks and debug options.
-2. Example of configured form-webhook pairs.
+![Webhook for Bricks Forms Plugin Dashboard](assets/screenshot-1.png)
+2. Example Form ID
+![Example Form ID in the backend](assets/screenshot-2.png)
+3. Action Must be Custom
+![Action Must be Custom](assets/screenshot-3.png)
+4.Example of Matches webhook Pair
+![Example of Matches webhook Pair](assets/screenshot-4.png)
 
 == Changelog ==
 

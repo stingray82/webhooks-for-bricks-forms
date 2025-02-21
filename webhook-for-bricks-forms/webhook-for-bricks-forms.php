@@ -125,12 +125,16 @@ function rup_bhfbf_render_webhook_for_forms_admin_page() {
     // Reload options after any changes.
     $form_webhooks = get_option( 'rup_bhfbf_webhooks', [] );
     $debug_mode    = get_option( 'rup_bhfbf_debug', false );
+    
+    // Prepare static translation strings
+    $heading_text = $editing ? __( 'Edit Form Webhook', 'webhook-for-bricks-forms' ) : __( 'Add New Form Webhook', 'webhook-for-bricks-forms' );
+    $button_text  = $editing ? __( 'Update Webhook', 'webhook-for-bricks-forms' ) : __( 'Save Settings', 'webhook-for-bricks-forms' );
     ?>
     <div class="wrap">
         <h1><?php esc_html_e( 'Webhook for Forms Settings', 'webhook-for-bricks-forms' ); ?></h1>
         <form method="post">
             <?php wp_nonce_field( 'save_webhook_for_forms', 'webhook_for_forms_nonce' ); ?>
-            <h2><?php esc_html_e( $editing ? 'Edit Form Webhook' : 'Add New Form Webhook', 'webhook-for-bricks-forms' ); ?></h2>
+            <h2><?php echo esc_html( $heading_text ); ?></h2>
             <table class="form-table">
                 <tr>
                     <th><label for="form_id"><?php esc_html_e( 'Form ID', 'webhook-for-bricks-forms' ); ?></label></th>
@@ -166,7 +170,7 @@ function rup_bhfbf_render_webhook_for_forms_admin_page() {
 
             <p class="submit">
                 <button type="submit" class="button button-primary">
-                    <?php esc_html_e( $editing ? 'Update Webhook' : 'Save Settings', 'webhook-for-bricks-forms' ); ?>
+                    <?php echo esc_html( $button_text ); ?>
                 </button>
             </p>
         </form>
@@ -209,6 +213,7 @@ function rup_bhfbf_render_webhook_for_forms_admin_page() {
     </div>
     <?php
 }
+
 
 
 
