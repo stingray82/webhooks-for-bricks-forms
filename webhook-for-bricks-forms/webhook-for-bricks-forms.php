@@ -1,15 +1,19 @@
 <?php
-/*
-Plugin Name: Webhook for Bricks Forms
-Description: Adds form ID and webhook URL pairs to trigger specific webhooks on Bricks form submissions, with debug options and response format selection.
-Plugin URI: https://github.com/stingray82/webhook-for-bricks-forms/
-Version: 1.31
-Author: Stingray82 & Reallyusefulplugins
-Text Domain: webhook-for-bricks-forms
-Author URI: https://Reallyusefulplugins.com
-License: GPLv2 or later
-Domain Path: /languages
-*/
+/**
+ * Plugin Name:       Webhook for Bricks Forms
+ * Tested up to:      6.7.2
+ * Description:       Adds form ID and webhook URL pairs to trigger specific webhooks on Bricks form submissions, with debug options and response format selection.
+ * Requires at least: 6.5
+ * Requires PHP:      7.4
+ * Version:           1.31
+ * Author:            reallyusefulplugins.com
+ * Author URI:        https://reallyusefulplugins.com
+ * License:           GPL-2.0-or-later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       webhook-for-bricks-forms
+ * Website:           https://reallyusefulplugins.com
+ * */
+
 
 // Load plugin text domain for translations
 add_action( 'plugins_loaded', 'rup_bhfbf_load_textdomain' );
